@@ -12,6 +12,10 @@ export class ChampionList extends Component {
     this.state = {
       championList: []
     };
+
+    this.onSelectChampion = props.onSelectChampion;
+
+    this.onSelectChampion = this.onSelectChampion.bind(this);
   }
 
   componentDidMount() {
