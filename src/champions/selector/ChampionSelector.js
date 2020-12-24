@@ -8,13 +8,18 @@ export class ChampionSelector extends Component {
       champion: props.champion
     };
 
+    this.disabled = false;
+
     this.clickCallback = props.clickCallback;
 
     this.onClick = this.onClick.bind(this);
   }
 
   onClick() {
-    this.clickCallback(this.state.champion);
+    if (!this.disabled) {
+      this.clickCallback(this.state.champion);
+      this.disabled = true;
+    }
   }
 
   render() {
