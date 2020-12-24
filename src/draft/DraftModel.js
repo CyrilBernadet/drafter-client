@@ -3,13 +3,13 @@ export class DraftModel {
     this.selectingTeam = 0;
     
     this.blueTeam = {
-      bannedChampions: [],
-      pickedChampions: []
+      ban: [],
+      pick: []
     };
 
     this.redTeam = {
-      bannedChampions: [],
-      pickedChampions: []
+      ban: [],
+      pick: []
     };
   }
 }
