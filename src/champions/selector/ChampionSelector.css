@@ -1,0 +1,8 @@
+img {
+  cursor: pointer;
+  object-fit: none;
+}
+
+img.disabled {
+  filter: grayscale(1);
+}

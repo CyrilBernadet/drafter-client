@@ -3,7 +3,6 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { ChampionSelector } from '../selector/ChampionSelector';
-import './ChampionList.css';
 
 export class ChampionList extends Component {
 

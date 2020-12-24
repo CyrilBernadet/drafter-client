@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import './ChampionSelector.css';
 
 export class ChampionSelector extends Component {
 
@@ -30,6 +31,7 @@ export class ChampionSelector extends Component {
         height={this.state.champion.image.h}
         width={this.state.champion.image.w}
         style={{ objectPosition: '-' + this.state.champion.image.x + 'px -' + this.state.champion.image.y + 'px' }}
+        className={this.disabled ? 'disabled' : ''}
         onClick={this.onClick}></img>
     )
   }
