@@ -4,53 +4,32 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { ChampionList } from '../champions/list/ChampionList';
 import { PickedChampion } from '../pickban/pick/PickedChampion';
+import { DraftModel } from './DraftModel';
 
 export class Draft extends Component {
+
+  pickTurn = ['blueTeam', 'redTeam', 'redTeam', 'blueTeam', 'blueTeam', 'redTeam', 'redTeam', 'blueTeam', 'blueTeam', 'redTeam'];
 
   constructor() {
     super();
     this.state = {
-      selectingTeam: 'blueTeam',
-      blueTeam: {
-        bannedChampions: [],
-        pickedChampions: []
-      },
-      redTeam: {
-        bannedChampions: [],
-        pickedChampions: []
-      }
+      draft : new DraftModel()
     }
 
     this.onSelectChampion = this.onSelectChampion.bind(this);
   }
 
   onSelectChampion(champion) {
-    const selectingTeam = this.state.selectingTeam;
-    var pickedChampions = this.state[selectingTeam].pickedChampions;
+    const draft = this.state.draft;
 
-    pickedChampions.push(champion);
+    if (draft.selectingTeam < this.pickTurn.length) {
+      const selectingTeam = this.pickTurn[draft.selectingTeam];
 
-    if (selectingTeam === 'blueTeam') {
-      this.setState(
-        {
-          selectingTeam: 'redTeam',
-          blueTeam: {
-            bannedChampions: this.state.blueTeam.bannedChampions,
-            pickedChampions: pickedChampions
-          }
-        }
-      );
-    } else {
-      this.setState(
-        {
-          selectingTeam: 'blueTeam',
-          redTeam: {
-            bannedChampions: this.state.redTeam.bannedChampions,
-            pickedChampions: pickedChampions
-          }
-        }
-      );
+      draft[selectingTeam].pickedChampions.push(champion);
 
+      draft.selectingTeam++;
+
+      this.setState({draft: draft})
     }
 
   }
@@ -63,7 +42,7 @@ export class Draft extends Component {
         </Row>
         <Row>
           <Col>
-            {this.state.blueTeam.pickedChampions.map((champion) =>
+            {this.state.draft.blueTeam.pickedChampions.map((champion) =>
               <PickedChampion champion={champion}></PickedChampion>
             )}
           </Col>
@@ -71,7 +50,7 @@ export class Draft extends Component {
             <ChampionList onSelectChampion={this.onSelectChampion}></ChampionList>
           </Col>
           <Col>
-            {this.state.redTeam.pickedChampions.map((champion) =>
+            {this.state.draft.redTeam.pickedChampions.map((champion) =>
               <PickedChampion champion={champion}></PickedChampion>
             )}
           </Col>
